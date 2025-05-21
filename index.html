@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>致 亲爱的冯曼珈</title>
+    <title>致  冯曼珈</title>
     <style>
         * {
             margin: 0;
@@ -265,6 +265,249 @@
                 font-size: 1.2rem;
             }
         }
+
+        /* 花瓣/雪花效果 */
+        .petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            overflow: hidden;
+        }
+        
+        .petals-container.active {
+            opacity: 1;
+        }
+        
+        .petal {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: rgba(255, 182, 193, 0.8);
+            border-radius: 150% 0 150% 0;
+            animation: fall linear infinite, sway ease-in-out infinite alternate;
+            opacity: 0.8;
+        }
+        
+        .petal-1 {
+            background-color: rgba(255, 182, 193, 0.8); /* 浅粉色 */
+        }
+        
+        .petal-2 {
+            background-color: rgba(255, 105, 180, 0.7); /* 热粉色 */
+        }
+        
+        .petal-3 {
+            background-color: rgba(255, 228, 225, 0.8); /* 薄雾玫瑰色 */
+        }
+        
+        .petal-4 {
+            background-color: rgba(255, 192, 203, 0.7); /* 粉红色 */
+        }
+        
+        .petal-5 {
+            background-color: rgba(199, 21, 133, 0.6); /* 紫红色 */
+        }
+        
+        @keyframes fall {
+            to {
+                top: 110%;
+            }
+        }
+        
+        @keyframes sway {
+            from {
+                transform: translateX(-10px) rotate(0deg);
+            }
+            to {
+                transform: translateX(10px) rotate(360deg);
+            }
+        }
+        
+        /* 问题弹窗 - Pinterest风格古典设计 */
+        .question-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(245, 240, 235, 0.85);
+            padding: 3rem;
+            border-radius: 2px;
+            z-index: 200;
+            max-width: 90%;
+            width: 420px;
+            text-align: center;
+            display: none;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.95);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        
+        /* 古典装饰边框 */
+        .question-modal::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            border: 1px solid rgba(155, 123, 85, 0.5);
+            pointer-events: none;
+        }
+        
+        /* 小角花装饰 */
+        .question-modal::after {
+            content: '❦';
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            color: rgba(155, 123, 85, 0.7);
+        }
+        
+        /* 角落装饰 */
+        .ornament {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.7;
+        }
+        
+        .top-left {
+            top: 10px;
+            left: 10px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(155, 123, 85, 0.8)' stroke-width='1'%3E%3Cpath d='M4 4h8v8H4z'/%3E%3Cpath d='M4 4L12 12'/%3E%3C/svg%3E");
+        }
+        
+        .top-right {
+            top: 10px;
+            right: 10px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(155, 123, 85, 0.8)' stroke-width='1'%3E%3Cpath d='M12 4h8v8h-8z'/%3E%3Cpath d='M12 12L20 4'/%3E%3C/svg%3E");
+        }
+        
+        .bottom-left {
+            bottom: 10px;
+            left: 10px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(155, 123, 85, 0.8)' stroke-width='1'%3E%3Cpath d='M4 12h8v8H4z'/%3E%3Cpath d='M4 20L12 12'/%3E%3C/svg%3E");
+        }
+        
+        .bottom-right {
+            bottom: 10px;
+            right: 10px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(155, 123, 85, 0.8)' stroke-width='1'%3E%3Cpath d='M12 12h8v8h-8z'/%3E%3Cpath d='M12 20L20 12'/%3E%3C/svg%3E");
+        }
+        
+        .question-modal h3 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: #392F24;
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        
+        .question-modal h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background-color: rgba(155, 123, 85, 0.7);
+        }
+        
+        .answer-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .answer-button {
+            background-color: transparent;
+            color: #392F24;
+            border: 1px solid rgba(155, 123, 85, 0.7);
+            padding: 0.7rem 2rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'Noto Serif SC', serif;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 2px;
+        }
+        
+        .answer-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(155, 123, 85, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .answer-button:hover::before {
+            left: 0;
+        }
+        
+        .answer-button:hover {
+            box-shadow: 0 2px 10px rgba(155, 123, 85, 0.3);
+        }
+        
+        /* 全屏视频播放器 */
+        .video-player {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 300;
+            display: none;
+        }
+        
+        .video-player video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .close-video {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 301;
+        }
+        
+        .close-video:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -283,20 +526,38 @@
         <div class="curtain-bottom"></div>
     </div>
     
+    <!-- 花瓣效果容器 -->
+    <div class="petals-container" id="petalsContainer"></div>
+    
+    <!-- 问题弹窗 -->
+    <div class="question-modal" id="questionModal">
+        <div class="ornament top-left"></div>
+        <div class="ornament top-right"></div>
+        <div class="ornament bottom-left"></div>
+        <div class="ornament bottom-right"></div>
+        <h3>你喜欢花吗？</h3>
+        <div class="answer-buttons">
+            <button class="answer-button" id="yesButton">是</button>
+            <button class="answer-button" id="noButton">否</button>
+        </div>
+    </div>
+    
+    
+    
     <!-- 主内容区域 -->
     <div class="content">
         <!-- 开场视频/图片 -->
         <section class="hero">
             <!-- 在这里放置海岸线和车辆的视频或动态图片 -->
             <video class="hero-video" autoplay loop controls>
-                <source src="Videos/null.mp4" type="video/mp4">
+                <source src="Videos/null_2.mp4" type="video/mp4">
                 <!-- 备用图片 -->
                 <img src="images/微信图片_20250520102607.jpg" alt="海岸线和行驶的车辆">
             </video>
             
             <div class="hero-overlay">
-                <h1 class="hero-title">致 冯曼珈</h1>
-                <p class="hero-subtitle">一封写给你的情书</p>
+                <h1 class="hero-title">致    冯曼珈</h1>
+                <p class="hero-subtitle">一封  写给你的情书</p>
             </div>
         </section>
         
@@ -319,7 +580,7 @@
                         <img src="images/微信图片_20250520102628.jpg" alt="你们的回忆照片">
                     </div>
                     <div class="text-container">
-                        <h2>黑夜给了我黑色的眼睛，我却用它寻找光明</h2>
+                        <h2>黑夜给了我黑色的眼睛，我用他找到了我的光明</h2>
                         <p>在看似平凡的日子里，每一个与你共度的时刻都闪烁着不平凡的光芒。你是我生命中最明亮的那束光，照亮了我所有的黑暗角落。</p>
                         <p>如果爱可以被描述，那么它一定是像海一样深沉，又像天空一样广阔的存在。而我愿意用余生的时间，去丈量这份感情的深度与广度。</p>
                     </div>
@@ -346,11 +607,22 @@
                         <p>曼珈，如果可以，我想牵着你的手走过春夏秋冬，看遍世间所有美景，感受生命中每一次心动的瞬间。在这个广阔的世界里，我最想探索的，是你内心的广袤无垠的天地。</p>
                     </div>
                 </div>
+
+                <div class="image-text-block fade-in">
+                    <div class="image-container">
+                        <img src="images/微信图片_20250520102617.jpg" alt="你们的回忆照片">
+                    </div>
+                    <div class="text-container">
+                        <h2>好像遇见你，就像是突然放弃了一种秩序井然的存在，将自己丢进一股旋风，开始以思想的速度穿越空间，我的轨迹稳稳向你</h2>
+                        <p>它既明亮又优雅，有着宇宙火焰般的复杂模式。就像周董唱的，而我独缺，，对你一生的了解，我想从此时间此刻开始了解你</p>
+                        <p>所以 亲爱的冯曼珈小姐 你 愿意 做我的 女朋友吗？</p>
+                    </div>
+                </div>
             </div>
         </section>
         
         <!-- 结尾部分 -->
-        <section class="section">
+        <section class="section" id="finalSection">
             <div class="container" style="text-align: center;">
                 <h2 class="fade-in" style="font-size: 2.5rem; margin-bottom: 2rem;">冯曼珈，我爱你</h2>
                 <p class="fade-in" style="font-size: 1.3rem; max-width: 700px; margin: 0 auto;">
@@ -370,6 +642,17 @@
             // 获取视频元素
             const videoElement = document.querySelector('.hero-video');
             const backgroundVideo = document.querySelector('.background-video');
+            const petalsContainer = document.getElementById('petalsContainer');
+            const questionModal = document.getElementById('questionModal');
+            const yesButton = document.getElementById('yesButton');
+            const noButton = document.getElementById('noButton');
+            const videoPlayer = document.getElementById('videoPlayer');
+            const responseVideo = document.getElementById('responseVideo');
+            const closeVideo = document.getElementById('closeVideo');
+            const finalSection = document.getElementById('finalSection');
+            
+            // 花瓣动画是否激活的标志
+            let petalsActivated = false;
             
             // 确保主视频不是静音状态
             videoElement.muted = false;
@@ -431,6 +714,120 @@
             document.querySelectorAll('.fade-in').forEach(element => {
                 observer.observe(element);
             });
+            
+            // 创建花瓣函数
+            function createPetals(count) {
+                petalsContainer.innerHTML = ''; // 清空容器
+                
+                for (let i = 0; i < count; i++) {
+                    const petal = document.createElement('div');
+                    petal.classList.add('petal');
+                    // 随机选择花瓣样式
+                    petal.classList.add(`petal-${Math.floor(Math.random() * 5) + 1}`);
+                    
+                    // 随机位置
+                    const startPositionX = Math.random() * 100;
+                    petal.style.left = `${startPositionX}%`;
+                    petal.style.top = `${Math.random() * -100}%`; // 从屏幕上方开始
+                    
+                    // 随机大小
+                    const size = Math.random() * 10 + 10; // 10-20px
+                    petal.style.width = `${size}px`;
+                    petal.style.height = `${size}px`;
+                    
+                    // 随机动画持续时间
+                    const fallDuration = Math.random() * 10 + 10; // 10-20s
+                    const swayDuration = Math.random() * 4 + 3; // 3-7s
+                    petal.style.animationDuration = `${fallDuration}s, ${swayDuration}s`;
+                    
+                    // 随机延迟
+                    const delay = Math.random() * 15;
+                    petal.style.animationDelay = `${delay}s, ${delay}s`;
+                    
+                    petalsContainer.appendChild(petal);
+                }
+            }
+            
+            // 检测是否滚动到最后一个部分
+            function checkScrollPosition() {
+                const scrollPosition = window.scrollY + window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight;
+                
+                // 如果滚动到页面最后90%的位置，且花瓣效果尚未激活
+                if (scrollPosition > documentHeight * 0.85 && !petalsActivated) {
+                    petalsActivated = true;
+                    
+                    // 激活花瓣效果
+                    createPetals(200); // 创建200个花瓣
+                    petalsContainer.classList.add('active');
+                    
+                    // 稍后显示问题弹窗
+                    setTimeout(() => {
+                        questionModal.style.display = 'block';
+                
+                // 添加淡入效果
+                setTimeout(() => {
+                    questionModal.style.opacity = '1';
+                    questionModal.style.transform = 'translate(-50%, -50%) scale(1)';
+                }, 100);
+                    }, 2000);
+                }
+            }
+            
+            // 添加滚动事件监听
+            window.addEventListener('scroll', checkScrollPosition);
+            
+            // 按钮点击事件
+            yesButton.addEventListener('click', function() {
+                questionModal.style.display = 'none';
+                // 修改视频源为"是"回答的视频
+                responseVideo.src = "Videos/yes-response.mp4";
+                responseVideo.load();
+                videoPlayer.style.display = 'block';
+                responseVideo.play();
+            });
+            
+            noButton.addEventListener('click', function() {
+                questionModal.style.display = 'none';
+                // 修改视频源为"否"回答的视频
+                responseVideo.src = "Videos/no-response.mp4";
+                responseVideo.load();
+                videoPlayer.style.display = 'block';
+                responseVideo.play();
+            });
+            
+            // 关闭视频
+            closeVideo.addEventListener('click', function() {
+                videoPlayer.style.display = 'none';
+                responseVideo.pause();
+            });
+            
+            // 视频播放结束后自动关闭
+            responseVideo.addEventListener('ended', function() {
+                videoPlayer.style.display = 'none';
+            });
+            
+            // 也为最后一部分添加观察器，以便在滚动到最后时触发花瓣效果
+            const finalSectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !petalsActivated) {
+                        petalsActivated = true;
+                        
+                        // 激活花瓣效果
+                        createPetals(200); // 创建200个花瓣
+                        petalsContainer.classList.add('active');
+                        
+                        // 稍后显示问题弹窗
+                        setTimeout(() => {
+                            questionModal.style.display = 'block';
+                        }, 2000);
+                        
+                        finalSectionObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            finalSectionObserver.observe(finalSection);
         });
     </script>
 </body>
